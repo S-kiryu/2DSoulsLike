@@ -8,6 +8,7 @@ public class PlayerRoll : MonoBehaviour
     public KeyCode rollKey = KeyCode.LeftShift;
 
     private bool isRolling = false;
+    private bool playerMoveCheck = false;
     private float rollTimer = 0f;
     private Vector2 rollDirection;
     private Rigidbody2D rb;
@@ -21,6 +22,11 @@ public class PlayerRoll : MonoBehaviour
 
     void Update()
     {
+        if (playerMoveCheck = false)
+        {
+            float moveX = Input.GetAxisRaw("Horizontal");
+        }
+
         if (!isRolling && Input.GetKeyDown(rollKey))
         {
             StartRoll();
@@ -43,6 +49,7 @@ public class PlayerRoll : MonoBehaviour
 
     void StartRoll()
     {
+        playerMoveCheck = true;
         isRolling = true;
         rollTimer = rollDuration;
 
@@ -55,14 +62,17 @@ public class PlayerRoll : MonoBehaviour
             rollDirection = Vector2.right; // デフォルト右に転がる
 
         // 無敵状態をつける場合はここでフラグ立てる
+        GetComponent<Collider2D>().enabled = false;
     }
 
     void EndRoll()
     {
+        playerMoveCheck = false;
         isRolling = false;
         rb.velocity = Vector2.zero;
         transform.rotation = originalRotation;
 
         // 無敵解除など
+        GetComponent<Collider2D>().enabled = true;
     }
 }

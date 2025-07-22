@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         {
 
             // シフトを押した瞬間1回だけ呼ばれる
-            Debug.Log("回避！");
+            Debug.Log($"回避！");
 
             //爆速瞬間移動
             //transform.position = new Vector2(this.transform.position.x + moveX, this.transform.position.y);
@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            
             rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
         }
 
